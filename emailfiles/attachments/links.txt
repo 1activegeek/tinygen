@@ -1,0 +1,10 @@
+http://testdatabasewebsense.com/maliciousembeddediframe  
+Security: Malicious Embedded Link  http://testdatabasewebsense.com/maliciousembeddedlink  
+Security: Malicious Web Sites  http://testdatabasewebsense.com/maliciouswebsites  
+Security: Mobile Malware  http://testdatabasewebsense.com/mobilemalware  
+Security: Phishing and Other Frauds  http://testdatabasewebsense.com/phishing  
+Security: Potentially Exploited Documents  http://testdatabasewebsense.com/potentiallyexploiteddocuments  
+Security: Potentially Unwanted Software  http://testdatabasewebsense.com/potentiallyunwantedsoftware  
+Security: Spyware  http://testdatabasewebsense.com/spyware  
+Security: Suspicious Embedded Link  http://testdatabasewebsense.com/suspiciousembeddedlink  
+

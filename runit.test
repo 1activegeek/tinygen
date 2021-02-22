@@ -1,0 +1,4 @@
+while true
+do
+/usr/local/tinygen/AlexaWget.CentOS.sh 0 demo r 1000 dlp 192.168.122.23 y y y
+done

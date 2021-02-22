@@ -1,0 +1,9 @@
+
+user=`head -n 1 /usr/local/tinygen/users.txt | awk -F ":" '{print $1}'`
+pass=`head -n 1 /usr/local/tinygen/users.txt | awk -F ":" '{print $2}'`
+domain_name=`grep CentOS.sh /usr/local/tinygen/runit.CentOS.sh | awk '{print $3}' | awk -F "." '{print $1}'`
+proxy=`grep 8080 /usr/local/tinygen/proxies.txt | head -n 1 | awk -F ":" '{print $1}'`
+echo using domain $domain_name user $user pass $pass proxy $proxy 
+export http_proxy=http://$domain_name\\$user:$pass@$proxy
+
+wget -O/tmp/junk.page $1> /dev/null 2>1 

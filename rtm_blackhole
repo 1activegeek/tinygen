@@ -1,0 +1,3 @@
+tcpdump -i ens32 port 2525 > /tmp/blackhole.log &
+tail -f /tmp/blackhole.log
+

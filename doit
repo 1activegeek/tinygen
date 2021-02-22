@@ -1,0 +1,13 @@
+while true
+do
+sleeper=`shuf -n 1 ep_sleep_list`
+./endpoint.sh dlpdude20 leroy Websense2 
+echo sleeping $sleeper seconds>>/tmp/endpoint.log
+sleep $sleeper
+#./endpoint.sh dlpdude20 leroy Websense2
+#echo sleeping $2 seconds>>/tmp/endpoint.log
+#sleep $2
+#./endpoint.sh dlpdude20 leroy Websense2
+#echo sleeping $3 seconds>>/tmp/endpoint.log
+#sleep $3
+done

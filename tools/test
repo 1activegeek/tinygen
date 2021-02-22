@@ -1,0 +1,7 @@
+
+for files in `ls -rtl | grep swap | grep -v sh| awk '{print $9}'`
+	do
+		echo "**<< $files >>**"
+		tail $files | more
+		echo
+	done

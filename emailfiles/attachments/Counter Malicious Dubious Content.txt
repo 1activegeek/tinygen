@@ -1,0 +1,6 @@
+1f2fc-1234r-abc12-3214d-dd145
+
+
+
+
+Detects keys in format wwwww-wwwww-wwwww-wwwww-wwwww (hyphenated only), where w is a digit or letter, but no sequence of wwwww can contain only digits.

@@ -1,0 +1,335 @@
+A
+
+Abandonment
+In some cases, facilities may be abandoned, such as when pipelines get old and the facilities need upgrading or need to be removed and replaced with a new pipeline. Natural gas pipeline companies must get Commission approval before abandoning facilities or discontinuing services that are subject to FERC jurisdiction. 
+
+Agenda
+See Sunshine Notice.
+
+
+B
+   
+ 
+
+BTU
+A British Thermal Unit (BTU) is a measure of the heating value of a fuel. It is the amount of heat energy required to raise the temperature of one pound of water one degree Fahrenheit. 
+
+
+C
+   
+ 
+
+Certificate of Public Convenience and Necessity
+A certificate issued by FERC that allows the recipient to engage in the transportation and/or sale for resale of natural gas in interstate commerce or to acquire and operate facilities needed to accomplish this. 
+
+Cogenerator
+A generating facility that produces electricity and another form of useful thermal energy (such as heat or steam), that is used for industrial, commercial, heating, or cooling purposes. 
+
+Compressor Station
+A facility that is used to compress natural gas in order to create additional pressure to increase the amount of gas a pipeline can hold, help move it through a pipeline, or to move it into or from storage. 
+
+Cost-Based Rates
+A ratemaking concept used for the design and development of rate schedules to ensure that the filed rate schedules recover only the cost of providing the service. 
+
+Critical Energy Infrastructure Information (CEII)
+CEII is information concerning proposed or existing critical infrastructure (physical or virtual) that: 
+Relates to the production, generation, transmission or distribution of energy; 
+Could be useful to a person planning an attack on critical infrastructure; 
+Is exempt from mandatory disclosure under the Freedom of Information Act; and 
+Gives strategic information beyond the location of the critical infrastructure. 
+
+
+D
+   
+ 
+
+Dismissal
+The Commission can dismiss a proceeding or issue a partial dismissal through a Commission order. If a proceeding is dismissed without prejudice, the applicant may make a revised filing for the case. If the proceeding is dismissed with prejudice, the applicant must file a request for rehearing. 
+
+Distribution
+For natural gas - the act of distributing gas from the city gate or plant to the customer. For electric - the act of distributing electric power using low voltage transmission lines that deliver power to retail customers. 
+
+Docket
+A formal proceeding before the Commission. Docket numbers are assigned to individual proceedings. 
+
+
+E
+   
+ 
+
+Effective Date
+The date on which a rate schedule or tariff sheet becomes legally effective. 
+
+Electric Utilities
+All enterprises engaged in the production and/or distribution of electricity for use by the public, including investor-owned electric utility companies; cooperatively-owned electric utilities; government-owned electric utilities (municipal systems, federal agencies, state projects, and public power districts). 
+
+Eminent Domain
+Congress has established that natural gas certificates and hydropower licenses issued by FERC also convey the power of eminent domain. Eminent domain is used as a last resort if a landowner and the project proponent cannot reach agreement on compensation for use or purchase of property required for the project. The project proponent is still required to compensate the landowner for the use or purchase of the property, and for any damages incurred during construction. However, the level of compensation would be determined by a court according to state law.
+
+Energy Glossary 
+Energy terms and definitions used in Energy Information Administration reports and by the energy industry. 
+
+Environmental Assessment
+An Environmental Assessment (EA) evaluates the consequences of a proposed action on the environment and recommends measures to minimize any potentially adverse affects. An EA is prepared when the environmental scoping process has determined that the project would not significantly affect the quality of the human environment. 
+
+Environmental Impact Statement
+The statement required of federal agencies by Section 102 (C) of the National Environmental Policy Act of 1969, for major Federal actions that may significantly affect the quality of the human environment. 
+
+Evaluative Resolution
+Someone is determining who is right or wrong during dispute resolution.
+
+
+F
+   
+ 
+
+Federal Rates
+Rates that apply to the marketing of wholesale power and transmission services provided by government owned or leased facilities to non-Federal customers. This is done through FERC-approved rate schedules or contracts at revenue levels sufficient to repay the Federal charges incurred in providing these services. 
+
+
+G
+   
+ 
+
+Gathering Line
+Pipelines, generally small in diameter, used to transport oil or gas from the well to a processing facility or a mainline pipeline.
+
+Gasification
+A process that converts liquefied natural gas (LNG) from a liquid back to a gas. This is done by increasing the temperature and decreasing the pressure of the LNG. 
+
+Generation
+The act of producing electrical energy from other forms of energy (such as thermal, mechanical, chemical or nuclear); also, the amount of electric energy produced, usually expressed in kilowatthours (Kwh) or megawatthours (MWh). 
+
+
+H
+   
+ 
+
+Hydropower
+Takes the energy of running water and converts it to electricity. 
+
+Hydropower Exemption
+Small hydropower projects (less than 5 megawatts) that are exempted from the Commission's licensing requirements. Exemptions are granted in perpetuity. 
+
+Hydropower License (Major)
+A major license issued by the Commission, authorizes the licensee to construct and operate a new project, or continue to operate an existing project, which is capable of generating more than 5 megawatts. The license term is from 30 to 50 years. 
+
+Hydropower License (Minor)
+A minor license issued by the Commission, authorizes the licensee to construct and operate a new project, operate an existing project, which is capable of generating less than 5 megawatts. The license term is typically 30 years. 
+
+Hydropower Re-license
+A major or minor license issued by the Commission that authorizes the licensee to receive a new license term for an existing licensed project. The new license term may be from 30 to 50 years. 
+
+
+I
+   
+ 
+
+Independent System Operator
+An independent, Federally regulated entity established to coordinate regional transmission in a non-discriminatory manner and ensure the safety and reliability of the electric system. 
+
+Independent Power Producer
+A corporation, person, agency, authority, or other legal entity or instrumentality that owns or operates facilities for the generation of electricity for use primarily by the public, and that is not an electric utility. 
+
+Interstate
+Sales where transportation of natural gas, oil, or electricity crosses state boundaries. Interstate sales are subject to Commission jurisdiction. 
+
+Interstate Commerce
+An interchange of goods or commodities which involves transportation between states.
+
+Intervenor
+An intervenor formally participates in a Commission proceeding by filing a request to intervene. Intervenors are able to file briefs, appear at hearings, and be heard by the courts if they choose to appeal the Commission's final ruling. 
+
+Intrastate
+Sales where transportation of natural gas, oil, or electricity occur within a single state and do not cross state boundaries. Intrastate sales are not subject to Commission jurisdiction. 
+
+
+L
+   
+ 
+
+Liquefied Natural Gas (LNG) 
+Reducing the temperature of natural gas to minus 259 degrees at atmospheric pressure will convert the gas into a liquid. Its volume as a liquid is about 1/600 compared to its volume as a gas. 
+
+Local Distribution Company
+Any firm, other than a natural gas pipeline, engaged in the transportation or local distribution of natural gas and its sale to customers that will consume the gas. 
+
+
+M
+   
+ 
+
+Market Power
+The ability of any market trader with a large market share to significantly control or affect price by withholding production from the market, limiting service availability, or reducing purchases. 
+
+MCF
+A MCF is equivalent to 1,000 cubic feet (of gas).
+
+MMCF
+A MMCF is equivalent to 1,000,000 cubic feet (of gas), or 1,000 Mcf.
+
+Metering Facility
+A facility that measures and registers the amount and direction of natural gas or electricity that flows through the facility.
+
+
+N
+   
+ 
+
+Natural Gas
+A naturally occurring combustible mixture of gases recovered from the earth from wells. It is composed predominantly of methane, but contains other light hydrocarbons and impurities. 
+
+Negotiated Rate
+An alternative to traditional cost-of-service rates, where a rate for a service varies from a pipeline's otherwise applicable tariff and is mutually agreed upon by a pipeline and its customer. At the time a customer is considering a negotiated rate, a recourse rate that is on file in the pipeline's tariff must also be available to that customer. Also known as negotiated/recourse rates. 
+
+Non-evaluative Resolution
+No one is deciding (evaluating the evidence of) a case for the disputants during dispute resolution.
+
+Non-Public Documents
+Includes information location about proposed or existing critical energy infrastructure information (CEII), and privileged information, which is usually confidential business information or cultural resource reports.
+
+Notice
+The Commission issues public notices for a variety of purposes, such as Commission meeting, applications for energy projects, rate cases, technical conferences, and proposed rule makings. 
+
+
+O
+   
+ 
+
+Open Access Order No. 888 requires utilities to allow others to use their transmission and distribution facilities, to move bulk power from one point to another on a nondiscriminatory basis for a cost-based fee. 
+
+
+P
+   
+ 
+
+Pipeline Certificate See Certificate of Public Convenience and Necessity 
+
+Power Exchange
+An entity providing a competitive spot market for electric power through day- and/or hour-ahead auction of generation and demand bids. 
+
+Power Marketer
+Business entities engaged in buying and selling electricity. Power marketers do not usually own generating or transmission facilities. Power marketers, as opposed to brokers, take ownership of the electricity and are involved in interstate trade. These entities must file with the Commission to obtain status as a power marketer. 
+
+Power Pool
+An association of two or more interconnected electric systems having an agreement to coordinate operations and planning for improved reliability and efficiencies. 
+
+Powerhouse
+A structure at a hydroelectric plant site that contains the turbine and generator. 
+
+Public Documents 
+Public has unrestricted access to these documents, which includes: 
+Applications 
+Forms 
+Publications 
+Orders 
+Opinions 
+Decisions 
+Rulemakings 
+Financial and statistical reports 
+Administrative staff manuals 
+Policy statements 
+Frequently requested FOIA-processed records. 
+
+
+Q
+   
+ 
+
+Qualifying Facility
+A cogeneration or small power production facility that meets certain ownership, operating, and efficiency criteria established by the Commission pursuant to the Public Utility Regulatory Policies Act. 
+
+
+R
+   
+ 
+
+Rate
+The authorized charges per unit or level of consumption for a specified time period for any of the classes of utility services provided to a customer. 
+
+Rate Base
+The value of property upon which a utility is permitted to earn a specified rate of return as established by a regulatory authority. 
+
+Rate Case
+A proceeding before the Commission that involves the rates to be charged for a service that is provided by a public utility. 
+
+Rate of Return
+The ratio (percentage) of profits (or earnings) compared to capital or assets. 
+
+Rate Schedule 
+The rates, charges, and provisions under which service is supplied to the designated class of customers. 
+
+Recourse Rate
+A cost-of-service based rate for natural gas pipeline service that is on file in a pipeline's tariff and is available to customers who do not negotiate a rate with the pipeline company. Also see negotiated rate.
+
+Refund
+An amount of money ordered by the Commission to be returned to wholesale or retail customers after it has been determined that a rate increase has been excessive or not justified. 
+
+Regulations
+Rules that implement laws passed by Congress, which give federal agencies their legal authority to do business.
+
+Request for Rehearing or Appeal
+A request of rehearing or appeal is a pleading by any party to a proceeding before the Commission petitioning the Commission to reconsider an order in that proceeding. There are statutory deadlines for filing requests for rehearing. 
+
+Retail Sales
+Sales made directly to the customer that consumes the energy product. 
+
+
+S
+   
+ 
+
+Sales for Resale
+A type of wholesale sales covering energy supplied to other electric utilities, cooperatives, municipalities, and Federal and state electric agencies for resale to ultimate consumers. 
+
+Scoping
+The scoping process is used to solicit public input on potential issues and whether there is a potential for significant adverse affects to the human environment from a proposed energy project, and identify the scope of the Environmental Assessment or Environmental Impact Statement to be prepared. 
+
+Service List
+The Commission's Secretary maintains service lists for individual FERC proceedings. Service lists are restricted to intervenors. Intervenors on the service list will receive the applicant's filings, Commission documents related to the case, and materials filed by other interested parties. 
+
+Statutes
+The laws passed by Congress that give the Commission its power to regulate. The Commission must also comply with environmental statutes when issuing certificates for natural gas pipelines and licenses for hydroelectric projects, as well as general administrative statutes.
+
+Storage Facility
+Underground storage of natural gas in natural geologic reservoirs such as depleted oil or gas reservoirs or natural underground caverns. Gas is transported from producing fields during periods of low demand, stored in underground storage, and then withdrawn for distribution during periods of peak demand. 
+
+Sunshine Notice
+Commonly referred to as the Agenda, the Sunshine Notice is the legal notice that is required under the Sunshine Act. This Act states that public notice must be published at least one week in advance of all meetings where a quorum of the agency officials will be conducting or deciding official agency business. All Open Commission meetings have a Sunshine Notice that lists the items on which FERC will discuss, and take action. The Sunshine Notice for each Open Commission meeting can be found in the Calendar of Events. 
+
+Suspended Rates
+New rates that have been accepted for review by the Commission but not made effective for a period of time, up to a maximum period of five months. 
+
+
+T
+   
+ 
+
+Tariff
+A compilation of all effective rate schedules of a particular company or utility. Tariffs include General Terms and Conditions along with a copy of each form of service agreement. 
+
+Transmission
+Moving bulk energy products from where they are produced or generated to distribution lines that carry the energy products to consumers. 
+
+
+W
+   
+ 
+
+Well
+An opening in the ground made by drilling, boring, or any other manner, from which oil or gas (or water) is obtained. Wells may also be used to inject oil, gas, water, or other fluids into the ground.
+
+Wellhead
+A wellhead is the control equipment which is placed at the top of the well casing.
+
+Wellhead Price
+What it costs to produce natural gas at the wellhead. The wellhead price does not include any charges for treating, gathering, processing, transporting, or distributing. 
+
+Wheeling
+The transmission of electricity by an entity that does not own or directly use the power it is transmitting.
+
+Wholesale Sales
+Sales for resale in bulk power markets, natural gas, and oil. 
+
+Working Gas
+Gas in an underground storage facility which is available to be withdrawn and may be sold. This is in contrast to base gas, which is needed to operate the storage facility, and can't be recovered during a normal working cycle. 

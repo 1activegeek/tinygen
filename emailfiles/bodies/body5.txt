@@ -1,0 +1,55 @@
+Hey,
+I hope Forcepoint does not see this
+here is some info for you
+
+
+Procedure Notes
+Progress Notes
+Archie M Johnson Tue Jun 30, 2009 10:31 AM Pended
+June 30, 2009
+Patient Name: Gina, Lucas DOB: 01/23/1945
+Telephone #: (559) 221-2345
+SS#: [[[PLACE SSN HERE]]]
+--------------------------------------------------------------------------------
+Insurance: UHC
+How was the patient referred to the office: *** ({:20})
+Is a family member currently being seen by the requested physician? {YES/NO:63}
+If yes, what is the family members name : ***
+Previous PCP / Medical Group? ***
+Physician Requested: Dr. ***
+REASON:
+1) Get established, no current problems: {YES/NO:63}
+2) Chronic Issues: {YES/NO:63}
+3) Specific Problems: {YES/NO:63}
+Description of specific problem and/or chronic conditions:
+{OPMED SYMPTOMS:11123} the problem started {1-10:5044} {Time Units:10300}.
+Any Medications that may need a refill? {YES/NO:63}
+Current medications: ***
+--------------------------------------------------------------------------------
+Archie M Johnson
+Community Health Program Assistant Chief
+Family Practice & Community Medicine
+(559) 221-1234
+Lucas Gina Wed Jul 8, 2009 10:37 AM Pended
+ELECTIVE NEUROLOGICAL SURGERY
+HISTORY & PHYSICAL
+CHIEF COMPLAINT: No chief complaint on file.
+HISTORY OF PRESENT ILLNESS: Mary A Xxtestfbonilla is a ***
+Past Medical History
+Diagnosis Date
+? Other Deficiency of Cell-Mediated Immunity
+Def of cell-med immunity
+? Erythema Multiforme
+? Allergic Rhinitis, Cause Unspecified
+Allergic rhinitis
+? Unspecified Osteoporosis 12/8/2005
+DEXA scan - 2003
+? Esophageal Reflux 12/8/2005
+priolosec, protonix didn't work, lost weight
+? Primary Hypercoagulable State
+MUTATION FACTOR V LEIDEN
+? Unspecified Glaucoma 1/06
+? OPIOID PAIN MANAGEMENT 1/24/2007
+Patient is on opioid contract - see letter 1/24/2007
+? Chickenpox with Other Specified Complications 2002
+

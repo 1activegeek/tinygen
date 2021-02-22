@@ -1,0 +1,1789 @@
+#!/bin/bash
+
+#a little clean-up
+test -f /1
+if [ "$?" == "0" ]
+	then
+		rm -f /1
+fi
+#end clean-up
+
+clear
+# get window size for resizing later
+cols=`tput cols`
+lines=`tput lines`
+printf '\e[8;37;75t'
+test -f runit.CentOS.sh
+if [ "$?" == "1" ]
+	then
+	clear
+	tput sgr 0 1
+	tput setaf 1
+	tput bold
+	echo YOU NEED TO RUN setup.CentOS.sh PRIOR TO USING tgcc 
+	tput sgr0
+	else
+function work_hours {
+grep worktime /tmp/runit.log > /dev/null
+hours=$?
+if [ "$hours" == "0" ]
+        then
+                hours=WORKTIME
+        else
+                hours=AFTERHOURS
+fi
+tput cup 1 32
+tput setaf 6
+echo $hours
+tput sgr0
+}
+function general {
+gen=true
+num_urls=`cat /usr/local/tinygen/runit.CentOS.sh | awk '{print $5}'`
+ps -e | grep -i alexa > /dev/null
+tinygen=$?
+clear
+cat ./general.tpl
+if [ "$tinygen" == "0" ]
+        then
+                tput cup 1 15
+		tput setaf 2
+                echo RUNNING
+		work_hours
+		tput sgr0
+        else
+                tput cup 1 15
+		tput setaf 1
+                echo STOPPED
+		work_hours
+		tput sgr0
+fi
+
+tput setaf 6
+tput cup 4 17;echo '1-';tput cup 4 19;tail -n 1 ./inbound_odds.txt
+tput cup 5 17;echo '1-';tput cup 5 19;tail -n 1 ./mail_odds.txt
+tput cup 6 17;echo '1-';tput cup 6 19;tail -n 1 ./web_odds.txt
+tput cup 7 17;tail -n 1 ./dlp_speed.txt
+case `cat /usr/local/tinygen/sleep_list | grep 10000000` in
+10000000) 
+tput cup 1 15; tput ech 7; tput bold; tput setaf 3; echo "PAUSED "; tput sgr0; tput cup 8 15;tput setaf 3; tput bold;tput smso; echo PAUSED; tput sgr0; tput rmso; tput setaf 6
+pause=1
+;;
+*)
+tput cup 8 17;echo '1-';tput cup 8 19;tail -n 1 ./sleep_list
+;;
+esac
+tput cup 9 17
+echo $num_urls
+mode_letter=`grep CentOS /usr/local/tinygen/runit.CentOS.sh | awk '{print $4}'`
+case $mode_letter in
+r) mode=random;;
+e) mode=even;;
+t) mode=top;;
+b) mode=bottom;;
+esac
+tput cup 10 8
+tput setaf 6
+echo $mode
+ tput cup 32 0
+tput sgr0
+mail=`grep -i alex runit.CentOS.sh | awk '{print $8 }'`
+web=`grep -i alex runit.CentOS.sh | awk '{print $9}'`
+inbound=`grep -i alex runit.CentOS.sh | awk '{print $10}'`
+if [ "$mail" == "y" ]
+ then
+ mail_option=ON
+ mail_color=2
+ else
+ mail_option=OFF
+ mail_color=1
+ fi
+if [ "$web" == "y" ]
+ then
+ web_option=ON
+ web_color=2
+ else
+ web_option=OFF
+ web_color=1
+ fi
+if [ "$inbound" == "y" ]
+ then
+ inbound_option=ON
+ in_color=2
+ else
+ inbound_option=OFF
+ in_color=1
+ fi
+tput cup 4 34;tput setaf $mail_color;echo $mail_option;tput sgr0
+tput cup 5 34;tput setaf $web_color;echo $web_option;tput sgr0
+tput cup 6 34;tput setaf $in_color;echo $inbound_option;tput sgr0
+ tput cup 32 0
+}
+
+function files_base {
+tput cup 0 0
+cat files.tpl
+tput setaf 6
+tput cup 6 4
+ls /usr/local/tinygen/emailfiles/attachments | wc -l
+tput cup 8 4
+du -sh /usr/local/tinygen/emailfiles/attachments | awk '{print $1}'
+tput cup 6 18
+ls /usr/local/tinygen/emailfiles/bodies | wc -l
+tput cup 8 18
+du -sh /usr/local/tinygen/emailfiles/bodies | awk '{print $1}'
+tput cup 6 27
+ls /usr/local/tinygen/emailfiles/endpoint | wc -l
+tput cup 8 27
+du -sh /usr/local/tinygen/emailfiles/endpoint | awk '{print $1}'
+tput cup 6 40
+huh=`tail -n 1 /usr/local/tinygen/huh`
+echo $huh
+case $huh in 
+	myurls.txt)
+		tput cup 6 50
+		echo " (Alexa)"
+	;;
+        urls.txt)
+                tput cup 6 50
+                echo " (Custom)"
+        ;;
+        manual)
+                tput cup 6 50
+                echo " (Manual)"
+        ;;
+esac
+ storage=`df | grep "/dev/root" | awk '{ print $5}' | awk -F "%" '{print $1}'`
+#storage=70
+#storage=80
+if [ "$storage" -ge "70" ] && [ "$storage" -lt "80" ]
+then tput setaf 3
+line=15
+else #tput setaf 2
+#fi
+
+if [ "$storage" -ge "80" ]
+then tput setaf 1
+line=16
+else tput setaf 2
+line=14
+fi
+fi
+ tput cup $line 2; df | grep "/dev/root";  tput cup 32 0
+
+tput setaf 2;tput smso; tput cup 14 55; echo "  ";tput rmso;tput cup 14 57; echo " <70%"; tput cup 32 0; tput sgr0
+tput setaf 3;tput smso; tput cup 15 55; echo "  ";tput rmso;tput cup 15 57; echo "=>70% and <80%"; tput cup 32 0; tput sgr0
+tput setaf 1;tput smso; tput cup 16 55; echo "  ";tput rmso;tput cup 16 57; echo "=>80%"; tput cup 32 0; tput sgr0
+  tput cup 32 0
+tput sgr0
+}
+
+
+function set_options {
+leader=`grep -i alex runit.CentOS.sh | awk '{print $1, $2, $3, $4, $5, $6, $7}'`
+tailer="$out_dlp $web_dlp $in_dlp"
+echo while true > runit.test
+echo do >> runit.test
+echo $leader $tailer >> runit.test
+echo done >> runit.test
+cp runit.test runit.CentOS.sh
+chmod +x runit.CentOS.sh
+}
+
+function getusers {
+tput=4
+tput setaf 6
+for users in `head -n 25 ./users.txt | sort`
+        do
+                tput cup $tput 45
+                echo $users
+                tput=$((tput + 1))
+        done
+tput sgr0
+ tput cup 32 0
+tput el
+}
+
+function rtm {
+while [ "$ans" != "q" ]
+ do
+        ps -e | grep rtm
+        if [ "$?" != "0" ]
+                then
+                        ./rtm $mode < .enter &
+                        rtm_pid=$!
+                        echo $rtm_pid > junk
+        fi
+ read ans
+ done
+BH_proc=`ps -ef | grep "tcpdump -i wlan0 port" | grep -v grep | awk '{print $2}'`
+kill $BH_proc
+process=`ps -e | grep rtm | awk '{print $1}'`
+kill -9 $process
+for pids in `ps -e | grep tail | awk '{print $1}'`
+do
+kill -9 $pids
+tput sgr0
+done
+ans=0
+general
+getusers
+ tput cup 32 0
+}
+
+function mta {
+mta_count=`wc -l < /usr/local/tinygen/mta.txt`
+echo $mta_count > /tmp/mtacount
+tput=12
+if [[ "$mta_count" < "3" ]]
+	then
+		 tput setaf 6
+		 for mtas in `head -n 2 mta.txt `
+		 do tput cup $tput 52
+		 echo $mtas
+		 tput=$(($tput + 1 ))
+		 done
+	else
+		tput setaf 2
+		tput cup $tput 51
+		echo Use the \"s\"how function 
+		tput cup 13 51
+		echo to view MTA\'s
+fi
+ tput cup 32 0
+tput sgr0
+}
+
+function getif {
+tput=4
+for interfaces in `cat ./interfaces.txt | sort`
+        do
+		tput setaf 6
+                tput cup $tput 3
+		ip addr | grep inet | grep $interfaces > /dev/null
+		if [ "$?" != "0" ]
+			then
+				tput setaf 1
+				tput bold
+				tput smso
+                		echo $interfaces
+				tput smso
+				tput sgr0
+				tput setaf 6
+			else
+				echo $interfaces
+		fi
+                tput=$((tput + 1))
+		tput sgr0
+        done
+
+ tput cup 32 0
+}
+function modem {
+tput cup 26 52
+tput setaf 6
+n=`cat /usr/local/tinygen/modem.txt`
+echo "(${n:0:3})${n:3:3}-${n:6}"
+tput sgr0
+}
+
+function gas_guage {
+count=0
+cursor=11
+tput civis
+tput cup 2 10
+tput setaf 2
+echo "--------------------------------------------"
+tput cup 4 10
+echo "--------------------------------------------"
+tput cup 3 10
+ echo "|"
+tput cup 3 53
+echo "|"
+tput cup 3 $cursor
+tput setaf 5
+while [ "$count" != "14" ]
+        do
+                echo ...
+                count=`expr $count + 1`
+                cursor=`expr $cursor + 3`
+                tput cup 3 $cursor
+                sleep 1
+        done
+tput setaf 3
+tput bold
+tput cup 5 32
+echo "^"
+tput cup 6 32
+echo "|"
+tput setaf 2
+tput cup 7 30
+echo "NEATO"
+tput cup 8 31
+echo "HUH"
+tput cup 9 32
+echo "?"
+tput cup 10 0
+tput cnorm
+tput sgr0
+sleep 3
+clear
+}
+function get_physical {
+tput setaf 6
+tput=16
+tput cup 16 52
+#physical="`ip addr | grep brd | grep scope | sed 's/\// /' | awk '{ print $2, $8 }' `"
+ip addr | grep brd | grep scope | sed 's/\// /' | awk '{ print $2, $8 }'> ifs.txt 
+
+#physical=`ip addr | grep brd | grep scope | grep -v second | sed 's/\// /' | awk '{ print $2, $8 }' `
+#echo $physical
+tput=16
+ sed -i s'/ /_/g' ifs.txt
+for ifs in `cat ifs.txt`; do tput cup $tput 52; tput=$(( tput +1));echo $ifs; done
+#aaaaafor ifs in `cat ifs.txt`
+#        do
+#                tput cup $tput 52
+#                echo $ifs
+#                tput=$(( tput + 1 ))
+#        done
+
+adaptor=`ip addr | grep brd | grep scope | sed 's/\// /' | awk '{ print $8 }' `
+tput cup 18 52
+tput sgr0
+echo Aliased Addresses
+tput=19
+tput setaf 6
+for ipaddr in `ip addr | grep secondary | awk '{print $2 }' #| awk -F "/" '{print $1}'`
+	do
+		tput cup $tput 52
+		echo $ipaddr
+		tput=$(( tput + 1 ))
+	done
+tput sgr0
+}
+
+function getpxy {
+tput=4
+tput setaf 6
+for proxies in `cat ./proxies.txt`
+        do
+                tput cup $tput 32
+                echo $proxies
+                tput=$((tput + 1))
+        done
+tput sgr0
+ tput cup 32 0
+}
+
+function getshares {
+tput=4
+tput setaf 6
+for shares in `cat ./shares.txt`
+        do
+                tput cup $tput 52
+                echo $shares
+                tput=$((tput + 1))
+        done
+tput sgr0
+ tput cup 32 0
+}
+
+
+general
+getusers
+ tput cup 32 0
+while [ "$reply" != "q" ]
+	do
+		read reply
+		case $reply in
+			I) if [ "$gen" != "true" ]
+				then
+					 tput cup 32 0
+					tput el
+					tput setaf 1
+					echo you are not on the General page
+					 tput cup 32 0
+					tput sgr0
+				else
+					tput cup 4 19
+					read inbound
+if [[ "$inbound" =~ ^-?[0-9]+$ ]]
+				#	if [ "$inbound" == "h" ]
+					then
+					./change_speed.sh i $inbound> /dev/null
+					tput cup 4 19;tput ech 3;tput setaf 6;tail -n 1 inbound_odds.txt;tput sgr0
+					 tput cup 32 0	
+					tput el
+					else
+                                                clear
+                                                cat /usr/local/tinygen/help/in_die.hlp
+                                                tput cup 32 0
+                                                echo press enter to return to TGCC
+                                                read
+                                                general
+                                                getusers
+
+					fi
+			   fi
+			;;
+			O) tput cup 5 19
+			   read outbound
+if [[ "$outbound" =~ ^-?[0-9]+$ ]]
+			then
+                           ./change_speed.sh m $outbound> /dev/null
+			   tput cup 5 19;tput ech 3;tput setaf 6;tail -n 1 mail_odds.txt;tput sgr0
+                            tput cup 32 0
+			else
+			                                                   clear
+                                                cat /usr/local/tinygen/help/out_die.hlp
+                                                tput cup 32 0
+                                                echo press enter to return to TGCC
+                                                read
+                                                general
+                                                getusers
+
+                                        fi
+                        ;;
+			W) tput cup 6 19
+                           read web_speed
+                           ./change_speed.sh p $web_speed> /dev/null
+                           tput cup 6 19;tput ech 3;tput setaf 6;tail -n 1 web_odds.txt;tput sgr0
+                            tput cup 32 0
+			;;
+			D) tput cup 7 17
+                           read dlp_speed
+                           ./change_speed.sh d $dlp_speed> /dev/null
+                           tput cup 7 17;tput ech 3;tput setaf 6;tail -n 1 dlp_speed.txt;tput sgr0
+                            tput cup 32 0
+                        ;;
+
+			S)  tput cup 32 0; tput setaf 3;echo "Enter Upper Multiplier Number I.E. 5 or \"pause\"";tput sgr0
+			   tput cup 8 15;tput ech 6; tput cup 8 17
+                           read web_sleep
+if [[ "$web_sleep" =~ ^-?[0-9]+$ ]]
+			   #if [ "$web_sleep" == "pause" ]
+				then
+		                        ./change_speed.sh w $web_sleep> /dev/null
+				else
+					echo 10000000 > /usr/local/tinygen/sleep_list
+					tput cup 8 19;tput ech 3;tput setaf 6;tail -n 1 sleep_list;tput sgr0
+			   fi
+                            tput cup 32 0
+			   if [ "$pause" = "1" ] && [ "$web_sleep" != "pause" ]
+				then
+					 tput cup 32 0
+#					echo "Restart (NOT REBOOT) needed"
+#					echo "do you want to restart? y/n"
+#					read Restart
+#					if [ "$Restart" = "y" ]
+#						then
+for pids in `ps -ef | grep 0000000 | grep sleep | awk '{print $2}'`; do kill -9 $pids; done
+#					fi
+					pause=0
+				fi
+			   general
+			   getusers
+			;;
+			\#) tput cup 9 17
+			    read urls_input
+			    tput cup 9 17
+			    tput ech 5
+			    tput setaf 6
+			    echo $urls_input
+			    tput sgr0
+			     tput cup 32 0
+			    tput el
+			    # Now lets fix the runit command
+			    new=`grep CentOS /usr/local/tinygen/runit.CentOS.sh | awk '{print $5}'`
+			    #current=`grep CentOS /usr/local/tinygen/runit.CentOS.sh | awk '{print $5}'`
+if [ "$new" != "$urls_input" ]
+	then
+ tput cup 32 0
+			    sed -i "s/$new/$urls_input/" /usr/local/tinygen/runit.CentOS.sh
+#runit will get the new number as its 5th argument to the AlexaWget command
+#a reboot will have to take place for this to take effect as the runit
+#scripts are read at boot
+
+#rebuild screen to update values
+			     tput cup 32 0
+			    tput setaf 1
+			    echo This will require a reboot to take place. Reboot\? y\/n
+			     tput cup 32 54
+			    read reboot
+			    tput sgr0
+			    if [ "$reboot" == "y" ]
+				then
+					clear
+					echo rebooting
+					reboot
+				else
+					 tput cup 32 0
+					tput el
+					tput setaf 2
+					echo OK Your changes will take effect after you reboot then
+					sleep 3
+					tput sgr0
+					 tput cup 32 0
+					tput el
+			    fi
+			     tput cup 32 0
+			    tput el
+else
+	 tput cup 32 0
+	tput el
+	tput setaf 1
+	echo Current Value \= Input Value. No changes made
+	tput sgr0
+	sleep 3
+	 tput cup 32 0
+	tput el
+fi
+			;;
+			m)  tput cup 32 0
+			 echo What mode do you want \<b\> \<e\> \<r\> \<t\>
+			    tput cup 32 40
+			   read input_mode 
+		  if [ "$input_mode" == "b" ] || [ "$input_mode" == "e" ] || [ "$input_mode" == "r" ]  || [ "$input_mode" == "t" ]
+			then
+			   sed -i "s/ $mode_letter / $input_mode /" /usr/local/tinygen/runit.CentOS.sh
+			   general
+			   getusers
+                             tput cup 32 0
+                            tput setaf 1
+                            echo This will require a reboot to take place. Reboot\? y\/n
+                             tput cup 32 54
+                            read reboot
+                            tput sgr0
+                            if [ "$reboot" == "y" ]
+                                then
+                                        clear
+                                        echo rebooting
+                                        reboot
+                                else
+                                         tput cup 32 0
+                                        tput el
+                                        tput setaf 2
+                                        echo OK Your changes will take effect after you reboot then
+                                        sleep 3
+                                        tput sgr0
+                                         tput cup 32 0
+                                        tput el
+                            fi
+			else
+				                                         tput cup 32 0
+                                        tput el
+                                        tput setaf 3
+                                        echo please enter b, e, r, or t
+                                        sleep 3
+                                        tput sgr0
+                                         tput cup 32 0
+                                        tput el
+		fi
+
+			;;
+			i) tput cup 5 34
+			   tput setaf 6
+				read web_dlp
+				case $web_dlp in
+					ON) tput sgr0
+					    web_dlp=y
+                                            out_dlp=$mail
+                                            in_dlp=$inbound
+					    set_options
+					     tput cup 32 0
+					    tput el
+					    general
+					    getusers
+					     tput cup 32 0
+				;;
+					OFF) tput sgr0
+					    web_dlp=n
+                                            out_dlp=$mail
+                                            in_dlp=$inbound
+					    set_options
+					     tput cup 32 0
+					    tput el
+					    general
+					    getusers
+					     tput cup 32 0
+				;;
+					*) tput sgr0
+					    tput cup 32 0
+					   general
+					   getusers
+					   echo Invalid Entry. Enter ON or OFF
+					    tput cup 32 0
+					   sleep 1
+					   tput el
+				;;
+				esac
+			;;
+                        o) tput cup 6 34
+			   tput setaf 6
+                                read in_dlp
+                                case $in_dlp in
+                                        ON) tput sgr0
+					    in_dlp=y
+					    out_dlp=$mail
+					    web_dlp=$web
+					    set_options
+                                             tput cup 32 0
+                                            tput el
+                                            general
+                                            getusers
+                                             tput cup 32 0
+                                ;;
+                                        OFF) tput sgr0
+					    in_dlp=n
+                                            out_dlp=$mail
+                                            web_dlp=$web
+					    set_options
+                                             tput cup 32 0
+                                            tput el
+                                            general
+                                            getusers
+                                             tput cup 32 0
+                                ;;
+                                        *) tput sgr0
+					    tput cup 32 0
+					   tput el
+					   general
+					   getusers
+					    tput cup 32 0
+                                           echo Invalid Entry. Enter ON or OFF
+                                            tput cup 32 0
+                                           sleep 1
+                                           tput el
+                                ;;
+                                esac
+			    tput sgr0
+                        ;;
+                        w) tput cup 4 34
+                           tput setaf 6
+                                read out_dlp
+                                case $out_dlp in
+                                        ON) tput sgr0
+                                            out_dlp=y
+                                            web_dlp=$web
+                                            in_dlp=$inbound
+					    set_options
+                                             tput cup 32 0
+                                            tput el
+                                            general
+                                            getusers
+                                             tput cup 32 0
+                                ;;
+                                        OFF) tput sgr0
+                                            out_dlp=n
+                                            web_dlp=$web
+                                            in_dlp=$inbound
+					    set_options
+                                             tput cup 32 0
+                                            tput el
+                                            general
+                                            getusers
+                                             tput cup 32 0
+                                ;;
+                                        *) tput sgr0
+                                            tput cup 32 0
+                                           general
+                                           getusers
+                                           echo Invalid Entry. Enter ON or OFF
+                                            tput cup 32 0
+                                           sleep 1
+                                           tput el
+                                ;;
+                                esac
+                        ;;
+
+			U)  tput cup 32 0
+			   echo do you want to add, remove or show users a\/r\/s;read action
+			    tput cup 32 0
+			   if [ "$action" == "r" ] 
+				then
+					 tput cup 32 0
+					tput el
+					 tput cup 32 0
+					echo enter a user to remove
+					tput cup 35 0
+					tput el
+					read user
+					grep -v $user ./users.txt > workingfile
+					cp workingfile users.txt
+					rm workingfile
+					#sleep 1
+					clear
+					general
+					 tput cup 32 0
+					getusers
+					tput cup 35 0
+			   		tput el
+					 tput cup 32 0
+					tput el
+					
+				else
+					if [ "$action" == "s" ]
+						then
+							clear
+							sort /usr/local/tinygen/users.txt | more
+							echo press enter to return to tgcc
+							read x
+                                        clear
+                                        general
+                                         tput cup 32 0
+                                        getusers
+                                        tput cup 35 0
+                                        tput el
+                                         tput cup 32 0
+                                        tput el
+						else
+					 tput cup 32 0
+					tput el
+					echo enter user and password to add
+					tput cup 35 0
+					tput el
+					read user
+					echo $user >> ./users.txt
+					#sleep 1
+					clear
+					general
+					getusers
+					tput cup 35 0
+					tput el
+					 tput cup 32 0
+			   		tput el
+					fi
+			   fi
+			    tput cup 32 0
+			;;
+			R)
+				 tput cup 32 0
+				tput el
+				echo Do you want \(web\) web \(email\) em \(insider\) in or \(endpoint\) ep RTM? 
+				 tput cup 32 68
+				read mode
+				clear
+				tput setaf 2
+				echo RTM will start in `tput sgr0``tput smso`3``
+				tput sgr0
+				echo ENTER \"q\" to return to tgcc
+				tput cup 0 18
+				tput smso
+				sleep 1
+				tput cup 0 18
+				echo 2
+				tput cup 0 18
+				sleep 1
+				echo 1
+				tput cup 0 18
+				tput sgr0
+				sleep 1
+				trap 'clear;echo I CANNOT LET YOU QUIT THAT WAY; echo ENTER \"q\" TO QUIT RTM' 2
+				rtm $mode 2>/dev/null
+				tput sgr0
+				tput cnorm
+				trap 2
+			;;
+			iptraf)
+				clear
+				 tput rev
+				 tput bold
+				 tput setaf 2
+				 ip addr | grep "state UP" | grep -v LOOPBACK | awk '{print $2, $8, $9}'
+				 tput setaf 1
+				 ip addr | grep "state DOWN" | grep -v LOOPBACK | awk '{print $2, $8, $9}'
+				 tput sgr0
+				echo enter the inteface you want to view traffic information for
+				#resize screen for iptraf
+				printf '\e[8;37;85t'
+				read iptraf_interface
+				iptraf-ng -d $iptraf_interface
+				printf '\e[8;37;75t'
+					clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+                           mta
+                                         tput cup 32 0
+                                        tput el
+
+			;;
+			restart)
+				 tput cup 32 0
+				tput setaf 1
+				echo This will restart the Alexa Script. Continue\? y\/n
+				 tput cup 32 50
+				read restart
+				if [ "$restart" == "y" ]
+					then
+				/usr/local/bin/killit
+				clear
+				echo RESTARTING ALEXA SCRIPT
+				gas_guage
+				fi
+					tput sgr0
+                                        clear
+                                        general
+                                        getusers
+                                        tput cup 35 0
+                                        tput el
+                                         tput cup 32 0
+                                        tput el
+
+			;;
+			reboot)
+				 tput cup 32 0
+				tput setaf 1
+				echo YOU HAVE ASKED TO REBOOT ARE YOU SURE? y\/n
+				tput sgr0
+				 tput cup 32 43
+				read reboot
+					if [ "$reboot" = "y" ]
+						then
+						  clear
+						  echo THANKS FOR GEN\'ING
+						  echo I should be back in about 30 seconds
+						  sleep 3
+						  if [ -f /tmp/blackhole_encrypt.pid ]
+						    then
+							echo removing /tmp/blackhole_encrypt.pid
+							sleep 2
+							rm -f /tmp/blackhole_encrypt.pid
+						  fi
+					   	  reboot
+						else
+						  clear
+                           			  general
+                           			  gen=true
+                           			  net=false
+                           			   tput cup 32 0
+                           			  getusers
+                           			   tput cup 32 0
+                           			  tput el
+                           			   tput cup 32 0
+
+					fi
+                        ;;
+                        poweroff)
+                                 tput cup 32 0
+                                tput setaf 1
+                                echo YOU HAVE ASKED TO POWEROFF ARE YOU SURE? y\/n
+                                tput sgr0
+                                 tput cup 32 45
+                                read shutdown
+                                        if [ "$shutdown" = "y" ]
+                                                then
+                                                  clear
+                                                  echo THANKS FOR GEN\'ING
+						  echo Shutting Down
+                                                  sleep 3
+                                                  poweroff
+                                                else
+                                                  clear
+                                                  general
+                                                  gen=true
+                                                  net=false
+                                                   tput cup 32 0
+                                                  getusers
+                                                   tput cup 32 0
+                                                  tput el
+                                                   tput cup 32 0
+
+                                        fi
+                        ;;
+
+			N) clear 
+			   net=true
+			   gen=false
+			   clear
+			   tput cup 0 0
+			   cat ./network.tpl
+			   if [ "$tinygen" == "0" ]
+			        then
+			                tput cup 1 15
+					tput setaf 2
+			                echo RUNNING
+					work_hours
+					tput sgr0
+			        else
+			                tput cup 1 15
+					tput setaf 1
+			                echo STOPPED
+					work_hours
+					tput sgr0
+			   fi
+				if [ "$pause" = "1" ]
+					then
+						 tput cup 1 15; tput ech 7;tput bold; tput setaf 3; echo "PAUSED "; tput sgr0 
+				fi
+
+			   getif
+			   getpxy
+			   test -f ./shares.txt
+			   shares=$?
+			   if [ "$shares" == "0" ]
+				then
+				   getshares
+			   fi
+			   mta
+			   modem
+			   get_physical
+			    tput cup 32 0
+			;;
+			M) 
+ tput cup 32 0
+echo do you want to add,show or remove an MTA\?
+echo enter \"a\", \"r\", or \"s\"
+tput cup 35 22
+read answer
+case $answer in
+        r)      clear
+                echo Here are the MTA\'s listed in mta.txt
+                cat /usr/local/tinygen/mta.txt
+                 tput cup 32 0
+                echo enter the unique part of the MTA you want to remove
+                 tput cup 32 52
+                read remove
+                clear
+                grep -v $remove /usr/local/tinygen/mta.txt > /tmp/mta.tmp
+                cp /tmp/mta.tmp /usr/local/tinygen/mta.txt
+		                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+                           mta
+                                         tput cup 32 0
+                                        tput el
+        ;;
+
+        a)      clear
+                echo Here are the MTA\'s listed in mta.txt
+                cat /usr/local/tinygen/mta.txt
+                 tput cup 32 0
+                echo enter the MTA you want to add
+                 tput cup 32 30
+                read add
+                clear
+                echo $add >> /usr/local/tinygen/mta.txt
+		                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+                           mta
+                                         tput cup 32 0
+                                        tput el
+        ;;
+        s)
+                clear
+                cat /usr/local/tinygen/mta.txt
+		echo press enter to return to tgcc
+		read reply
+		                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+                           mta
+                                         tput cup 32 0
+                                        tput el
+        ;;
+esac
+mta
+
+			;;
+			PI)
+			   tools/setIP.sh
+		                                      getif
+                           getpxy
+                           test -f ./shares.txt
+                           shares=$?
+                           if [ "$shares" == "0" ]
+                                then
+                                   getshares
+                           fi
+                           mta
+                           get_physical
+                            tput cup 32 0
+
+                            tput cup 32 0
+                           tput el
+                        ;;
+
+			T) ./tools/test_if.sh ./interfaces.txt ./proxies.txt
+			   tput setaf 3
+			   echo FIN
+			   echo Press Enter To Return To TGCC Network Settings
+			   tput sgr0
+			   read reply
+			   clear
+                           net=true
+                           gen=false
+                           tput cup 0 0
+                           cat ./network.tpl
+                           if [ "$tinygen" == "0" ]
+                                then
+                                        tput cup 1 15
+					tput setaf 2
+                                        echo RUNNING
+					tput sgr0
+					work_hours
+                                else
+                                        tput cup 1 15
+					tput setaf 1
+                                        echo STOPPED
+					tput sgr0
+					work_hours
+                           fi
+                                if [ "$pause" = "1" ]
+                                        then
+                                                 tput cup 1 15; tput ech 7;tput bold; tput setaf 3; echo "PAUSED "; tput sgr0
+                                fi
+
+                           getif
+                           getpxy
+                           test -f ./shares.txt
+                           shares=$?
+                           if [ "$shares" == "0" ]
+                                then
+                                   getshares
+                           fi
+                           get_physical
+			   mta
+                            tput cup 32 0
+
+			;;
+                        p)  tput cup 32 0
+			   tput el
+                           echo Enter the IP Address or Hostname you want to ping \(Destination\)
+			    tput cup 32 64
+                           read dest
+			    tput cup 32 0
+			   tput el
+			   echo Enter the IP Address you want to ping from \(Source\)
+			   echo or \"a\' for all interfaces
+			   tput cup 35 26
+			   read source
+			   tput clear
+			   if [ "$source" == "a" ]
+				then
+					for interfaces in `cat /usr/local/tinygen/interfaces.txt`
+					do
+			   			echo pinging from $interfaces to $dest
+						ping -c 1 -I $interfaces $dest > /dev/null
+				                success=$?
+				                #sleep 1
+				                if [ "$success" == "0" ]
+				                        then
+				                        tput setaf 2
+				                        echo SUCCESS
+				                        tput sgr0
+				                else
+				                        tput setaf 1
+				                        echo FAILED
+				                        failed=1
+				                        tput sgr0
+				        fi
+
+					done
+				else
+			   echo pinging from $source to $dest
+			   sleep 1
+			   ping -c 1 -I $source $dest > /dev/null
+                                                success=$?
+                                                #sleep 1
+                                                if [ "$success" == "0" ]
+                                                        then
+                                                        tput setaf 2
+                                                        echo SUCCESS
+                                                        tput sgr0
+                                                else
+                                                        tput setaf 1
+                                                        echo FAILED
+                                                        failed=1
+                                                        tput sgr0
+                                        fi
+
+			   fi
+			   echo Press Enter to return to tgcc
+			   read x
+                           clear
+                           net=true
+                           gen=false
+                           tput cup 0 0
+                           cat ./network.tpl
+                           if [ "$tinygen" == "0" ]
+                                then
+                                        tput cup 1 15
+                                        tput setaf 2
+                                        echo RUNNING
+                                        tput sgr0
+                                        work_hours
+                                else
+                                        tput cup 1 15
+                                        tput setaf 1
+                                        echo STOPPED
+                                        tput sgr0
+                                        work_hours
+                           fi
+                                if [ "$pause" = "1" ]
+                                        then
+                                                 tput cup 1 15; tput ech 7;tput bold; tput setaf 3; echo "PAUSED "; tput sgr0
+                                fi
+
+                           getif
+                           getpxy
+                           test -f ./shares.txt
+                           shares=$?
+                           if [ "$shares" == "0" ]
+                                then
+                                   getshares
+                           fi
+                           get_physical
+                           mta
+                            tput cup 32 0
+
+                        ;;
+
+			A)
+                            tput cup 32 0
+                           tput el
+                           echo Would you like to and or remove an Interface Address? a\/r
+                            tput cup 32 58
+                           read reply
+                                case $reply in
+                                        a)
+                                         tput cup 32 0
+                                        tput el
+                                        echo enter the IP to be added I.E. 192.168.88.100
+                                         tput cup 32 45
+                                        read IP
+                                        echo $IP >> interfaces.txt
+                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+			   mta
+                                         tput cup 32 0
+                                        tput el
+                                        ;;
+                                        r)
+                                         tput cup 32 0
+                                        tput el
+                                        echo enter the Interface to be removed I.E. 192.168.88.100
+                                         tput cup 32 55
+                                        read IP
+                                        grep -v $IP interfaces.txt >> working_file
+                                        cp working_file interfaces.txt
+                                        rm working_file
+                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+			   mta
+                                         tput cup 32 0
+                                        tput el
+                                        ;;
+
+                                        *)  tput cup 32 0
+                                        tput el
+                                        echo ENTER a or r
+                                        sleep 2
+                                         tput cup 32 0
+                                        tput el
+                                        ;;
+                                esac
+			;;
+			P)
+			    tput cup 32 0
+			   tput el
+			   echo Would you like to and or remove a Proxy Address? a\/r
+			    tput cup 32 54
+			   read reply
+				case $reply in
+					a)
+					 tput cup 32 0
+					tput el
+					echo enter the Proxy to be added I.E. 192.168.88.100:8080
+					 tput cup 32 55
+					read proxy
+					echo $proxy >> proxies.txt
+					clear
+					cat network.tpl
+                                	getif
+                                	getpxy
+                                	test -f ./shares.txt
+                                	shares=$?
+                                		if [ "$shares" == "0" ]
+                                 			then
+                                    				getshares
+                                		fi
+                                	get_physical
+			   mta
+                                	 tput cup 32 0
+					tput el
+					;;
+                                        r)
+                                         tput cup 32 0
+                                        tput el
+                                        echo enter the Proxy to be removed I.E. 192.168.88.100:8080
+                                         tput cup 32 55
+                                        read proxy
+                                        grep -v $proxy proxies.txt >> working_file
+					cp working_file proxies.txt
+					rm working_file
+                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+			   mta
+                                         tput cup 32 0
+                                        tput el
+					;;
+
+					*)  tput cup 32 0 	
+					tput el
+					echo ENTER a or r
+					sleep 2
+					 tput cup 32 0
+					tput el
+					;;
+				esac
+			;;
+				E)
+				test -f /usr/local/tinygen/shares.txt
+				if [ "$?" != "0" ]
+				   then
+					 tput cup 32 0
+					tput el
+					tput setaf 1
+					echo It looks like Endpoint is not set up
+					tput sgr0
+					sleep 2
+					 tput cup 32 0
+					tput el
+					echo Do you want to set it up? y\/n
+					read reply
+					if [ "$reply" == "y" ]
+						then
+							echo Let\'s do that
+							cd /usr/local/tinygen/tools
+						./endpoint_setup.sh
+						cd ..
+					fi
+				fi
+					clear
+					cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+                           		mta
+                                         tput cup 32 0
+                                        tput el
+
+                            tput cup 32 0
+                           tput el
+                           echo Would you like to add a Share, remove a Share, or pause? a\/r\/p
+                            tput cup 32 68
+                           read reply
+                                case $reply in
+                                        a)
+                                         tput cup 32 0
+                                        tput el
+                                        echo enter the Share to be added I.E. 192.168.88.100,box
+                                         tput cup 32 52
+                                        read share
+                                        echo $share >> shares.txt
+                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+			   mta
+                                         tput cup 32 0
+                                        tput el
+                                        ;;
+                                        r)
+                                         tput cup 32 0
+                                        tput el
+                                        echo enter the Share to be removed I.E. 192.168.88.100,box
+                                         tput cup 32 55
+                                        read share
+                                        grep -v $share shares.txt >> working_file
+                                        cp working_file shares.txt
+                                        rm working_file
+                                        clear
+                                        cat network.tpl
+                                        getif
+                                        getpxy
+                                        test -f ./shares.txt
+                                        shares=$?
+                                                if [ "$shares" == "0" ]
+                                                        then
+                                                                getshares
+                                                fi
+                                        get_physical
+					mta
+                                         tput cup 32 0
+                                        tput el
+                                        ;;
+					n)
+					 tput cup 32 0
+					tput el
+					;;
+
+                                        *)  tput cup 32 0
+                                        tput el
+                                        echo ENTER a or r
+                                        sleep 2
+                                         tput cup 32 0
+                                        tput el
+                                        ;;
+                                esac
+			;;
+			AA)
+			    tput cup 32 0
+			   tput el
+			   echo Would you like to add or remove an alias? a\/r
+			    tput cup 32 47
+			   read reply
+			   case $reply in
+			     a)
+				 tput cup 32 0
+				tput el
+				echo Enter the IP Address and CIDR to add I.E. 192.168.88.100\/24
+				 tput cup 32 60
+				read IP
+				ip addr add $IP dev wlan0
+				 tput cup 32 0
+				tput el
+				 tput cup 32 0
+                                echo would you like to add this Address to interfaces.txt? y\/n
+                                 tput cup 32 59
+                                read reply
+                                   if [ "$reply" == "y" ]
+                                        then
+						echo $IP | awk -F "/" '{print $1}' >> interfaces.txt
+                                #                cd ./tools
+                                #                ./get_interfaces.sh y >/dev/null
+                                #                cd ..
+                                   fi
+                                 tput cup 32 0
+                                tput el
+				clear
+				cat network.tpl
+				getif
+				getpxy
+				test -f ./shares.txt
+				shares=$?
+				if [ "$shares" == "0" ]
+                                 then
+                                    getshares
+                            	fi
+                            	get_physical
+			   mta
+                            	 tput cup 32 0
+			    	tput el
+			/usr/local/tinygen/tools/get_aliases.sh
+			     ;;
+			     r)
+                                 tput cup 32 0
+                                tput el
+				echo Enter the IP Address and CIDR to add I.E. 192.168.88.100\/24
+                                 tput cup 32 60
+                                read IP
+                                ip addr del $IP dev wlan0
+				 tput cup 32 0
+				tput el
+                                echo would you like to remove this Address from interface.txt? y\/n
+                                 tput cup 32 62
+                                read reply
+                                   if [ "$reply" == "y" ]
+                                        then
+                                                cd ./tools
+                                                ./get_interfaces.sh y >/dev/null
+                                                cd ..
+                                   fi
+                                 tput cup 32 0
+                                tput el
+
+
+				clear
+				cat network.tpl
+                                getif
+                                getpxy
+                                test -f ./shares.txt
+                                shares=$?
+                                if [ "$shares" == "0" ]
+                                 then
+                                    getshares
+                                fi
+                                get_physical
+			   mta
+                                 tput cup 32 0
+                                tput el
+			/usr/local/tinygen/tools/get_aliases.sh
+                             ;;
+			   esac
+			;;
+
+			H)
+			    tput cup 32 0
+			   echo enter phone number in format 1234567890
+			    tput cup 32 40
+			   read modem
+			   echo $modem > /usr/local/tinygen/modem.txt
+                                clear
+                                cat network.tpl
+                                getif
+                                getpxy
+                                test -f ./shares.txt
+                                shares=$?
+                                if [ "$shares" == "0" ]
+                                 then
+                                    getshares
+                                fi
+                                get_physical
+                           mta
+				modem
+                                 tput cup 32 0
+                                tput el
+                        /usr/local/tinygen/tools/get_aliases.sh
+
+			;;
+			G) clear
+			   general
+			   gen=true
+			   net=false
+			    tput cup 32 0
+			   getusers
+			    tput cup 32 0
+			   tput el
+			    tput cup 32 0
+			;;
+			games)
+				clear
+				echo "TR=Tiny-Roller"
+				echo "ttt=Tic-Tac-Toe"
+				sleep 2
+                           clear
+                           general
+                           gen=true
+                           net=false
+                            tput cup 32 0
+                           getusers
+                            tput cup 32 0
+                           tput el
+                            tput cup 32 0
+                        ;;
+
+# a little fun here
+			TR)
+                                /usr/local/tinygen/tools/.rollit.sh
+                           clear
+                           general
+                           gen=true
+                           net=false
+                            tput cup 32 0
+                           getusers
+                            tput cup 32 0
+                           tput el
+                            tput cup 32 0
+                        ;;
+
+			ttt)
+				/usr/local/tinygen/tools/.ttt
+				sleep 3
+			   clear
+                           general
+                           gen=true
+                           net=false
+                            tput cup 32 0
+                           getusers
+                            tput cup 32 0
+                           tput el
+                            tput cup 32 0
+			;;
+
+                        cu*)
+
+
+				trap 'clear;echo I CANNOT LET YOU QUIT THAT WAY; echo ENTER \"q\" TO QUIT EATING' 2
+			   while [ "$curry_stop" != "q" ]
+				do
+					clear
+					color=`seq 6 | shuf -n 1`
+					tput setaf $color
+					echo '          MMMMMmmmmmmmmm'
+					color=`seq 6 | shuf -n 1`
+					tput setaf $color
+					cat /usr/local/tinygen/.curry_wurst
+					#cat /etc/profile.d/pi.logo
+					tput sgr0
+					read curry_stop
+			#	sleep 1
+				done
+			   curry_stop=0
+			   #sleep 4
+			   clear
+                           general
+                           gen=true
+                           net=false
+                            tput cup 32 0
+                           getusers
+                            tput cup 32 0
+                           tput el
+                           trap 2
+                            tput cup 32 0
+
+                        ;;
+
+			F)
+clear
+files_base
+ #storage=`df | grep "/dev/root" | awk '{ print $5}' | awk -F "%" '{print $1}'`
+#storage=70
+storage=80
+
+read list
+case $list in
+        list)
+                 tput cup 32 0
+                tput el
+                echo Which Directory do you want to list? a\/b\/e
+                read dir
+                case $dir in
+                        a)
+                                clear
+                                ls  -l /usr/local/tinygen/emailfiles/attachments | more
+                                du -sh /usr/local/tinygen/emailfiles/attachments
+                                echo Press Enter to return to TGCC
+                        read x
+			files_base
+                                if [ "$pause" = "1" ]
+                                        then
+                                                 tput cup 1 15; tput ech 7; tput setaf 3; echo "PAUSED "
+                                fi
+                        ;;
+                        b)
+                                clear
+                                ls  -l /usr/local/tinygen/emailfiles/bodies | more
+                                du -sh /usr/local/tinygen/emailfiles/bodies
+                                echo Press Enter to return to TGCC
+                        read x
+			files_base
+                        ;;
+                        e)
+                                clear
+                                ls  -l /usr/local/tinygen/emailfiles/endpoint | more
+                                du -sh /usr/local/tinygen/emailfiles/endpoint
+                                echo Press Enter to return to TGCC
+                        read x
+			files_base
+                        ;;
+                        *)
+                                files_base
+                        ;;
+                esac
+clear
+                files_base
+                ;;
+	urls)
+		clear
+		echo "OK, we can use custom, manual, or alexa"
+		echo enter \"`tput setaf 2`custom`tput sgr0`\" to use urls from a list that you have copied 
+		echo to /usr/local/tinygen/custom_urls.txt
+		echo
+		echo enter \"`tput setaf 2`manual`tput sgr0`\" to manually type or paste urls
+		echo
+		echo enter \"`tput setaf 2`alexa`tput sgr0`\" to use the auto-generated urls from the alexa list 
+		echo
+		read urls
+	#	/usr/local/tinygen/abdul.sh $urls
+	# Custom urls mod start
+case $urls in
+        custom)
+		clear
+		echo "Make sure you have placed the urls you want in"
+		echo "/usr/local/tinygen/custom_urls.txt"
+		echo "This file will be copied to urls.txt"
+		echo Press Enter to continue
+		read X
+                cp /usr/local/tinygen/custom_urls.txt /usr/local/tinygen/urls.txt
+		clear
+                echo Setting mode to custom
+                echo Restarting Alexa script
+                /usr/local/tinygen/killit > /dev/null 2>1
+        ;;
+        alexa)
+		clear
+                rm /usr/local/tinygen/urls.txt > /dev/null 2>1
+                echo Setting mode to alexa
+                echo Restarting Alexa script
+                /usr/local/tinygen/killit > /dev/null 2>1
+	;;
+	manual)
+		clear
+		echo "Enter or paste the URLs you want TIny-Gen to retrieve"
+		echo "To exit entry mode, Enter a \".\" on an empty line"
+		> /usr/local/tinygen/urls.txt
+		read input
+		while [ "$input" != "." ]
+		do
+			echo $input >> /usr/local/tinygen/urls.txt
+			read input
+		done
+		echo manual > /usr/local/tinygen/huh
+		clear
+                echo Setting mode to custom
+                echo Restarting Alexa script
+                /usr/local/tinygen/killit > /dev/null 2>1
+        ;;
+        *)
+		clear
+                echo "HMMM, I did not understand that. "
+                sleep 1
+                echo "Phoning home to Mommy"
+		sleep 2
+		echo atdt,,`cat /usr/local/tinygen/modem.txt`
+                sleep 3
+		echo Dial Tone
+		echo Dialing
+		sleep 1
+                echo RING
+                sleep 2
+                echo RING
+                sleep 2
+                echo RING
+		echo CONNECT
+		sleep 1
+                echo "dweee-dedede-dweedddeeedwe (Modem Tones)"
+                sleep 2
+                echo silence
+                sleep 2
+                echo "She says it sounds like whales reproducing"
+                sleep 2
+                echo "Jonesie says default to alexa"
+                echo "going with Jonesie"
+                sleep 4
+                echo hope you enjoyed the Red October reference
+                sleep 2
+                sleep 2
+                clear
+                rm /usr/local/tinygen/urls.txt > /dev/null 2>1
+                echo Setting mode to alexa
+                echo Restarting Alexa script
+                /usr/local/tinygen/killit > /dev/null 2>1
+
+
+esac
+
+	# Custom urls mod stop
+
+		gas_guage
+		files_base
+		;;
+        q)
+                ;;
+        *)
+                # tput cup 32 0
+                #tput el
+		files_base
+                #echo enter list
+                ;;
+esac
+#done
+;;
+			*)  tput cup 32 0
+			   #echo INVALID COMMAND
+			   #sleep 2
+			   # tput cup 32 0
+			   tput el
+			;;
+
+		esac
+	done
+printf '\e[8;$lines;$cols't''
+clear
+echo
+echo
+color=`seq 6 | shuf -n 1`
+tput setaf $color
+color=`seq 6 | shuf -n 1`
+tput setaf $color
+#cat /usr/local/tinygen/.curry_wurst
+tput bold
+tgcc_user=`whoami`
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ "$tgcc_user" == "root" ]; then
+tput setaf $color
+cat /etc/profile.d/pi.logo
+tput sgr0
+echo OK, Bye then
+echo ENTER \"Pgcc\" to restart PiNY-GEN Control Center
+else
+#feh -F /usr/local/tinygen/tiny-gen.png
+tput sgr0
+/usr/local/tinygen/tgcc
+fi
+
+fi

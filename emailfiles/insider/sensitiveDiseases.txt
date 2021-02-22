@@ -1,0 +1,32 @@
+ADHD 
+Arthritis 
+Asthma 
+Autism 
+Avian Influenza 
+Birth Defects 
+Cancer 
+Chlamydia 
+Chronic Fatigue Syndrome 
+Diabetes 
+E. coli 
+Epilepsy 
+Fetal Alcohol Syndrome 
+Flu (Influenza) 
+Genital Herpes (Herpes Simplex Virus) 
+Giardiasis 
+Gonorrhea 
+H1N1 Flu 
+Heart Disease 
+Hepatitis 
+HIV/AIDS 
+HPV (Human papillomavirus) 
+Meningitis 
+MRSA (Methicillin Resistant Staphylococcus aureus) 
+Obesity 
+Salmonella 
+Scabies 
+Sexually Transmitted Diseases 
+Stroke 
+Trichomonas Infection (Trichomoniasis) 
+Tuberculosis (TB) 
+Water-related Diseases 

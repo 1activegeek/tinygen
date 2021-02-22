@@ -1,0 +1,2 @@
+<a class="embedly-card" href="http://embed.ly/code">Embed Code Generator | Embedly</a>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>

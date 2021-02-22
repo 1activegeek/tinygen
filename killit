@@ -1,0 +1,10 @@
+#!/bin/bash
+#get and kill Alexa Wget script in background
+echo SHUTTING DOWN >>/tmp/runit.log
+alexa_pid=`ps -ef | grep -i alexawget | grep -v grep | awk '{print $2}'`
+runit_pid=`ps -ef | grep -i runit | grep -v tail | grep -v grep | awk '{print $2}'`
+echo Killing Process ID $runit_pid>>/tmp/runit.log
+echo Killing Process ID $alexa_pid >>/tmp/runit.log
+kill -9 $runit_pid
+kill -9 $alexa_pid
+tail /tmp/runit.log

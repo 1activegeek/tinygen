@@ -1,0 +1,15 @@
+body4.txt
+customerdata.txt
+diseases.txt
+eicar.link.txt
+eicar.txt
+ftkw
+Hipaa.txt
+PatientInfo.txt
+postdatas.tar
+risky_domains.txt
+SB6043-S_SL.txt
+sensitiveDiseases.txt
+sensitiveDiseasesWithNames.txt
+ssn.txt
+test.txt

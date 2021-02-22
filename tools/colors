@@ -1,0 +1,23 @@
+clear
+tput smso
+tput setaf 1
+echo one
+echo
+tput setaf 2
+echo two
+echo
+tput setaf 3
+echo three
+echo
+tput setaf 4
+echo four
+echo
+tput setaf 5
+echo five
+echo
+tput setaf 6
+echo six
+echo
+tput setaf 7
+echo seven
+tput rmso

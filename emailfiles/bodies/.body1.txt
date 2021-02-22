@@ -1,0 +1,46 @@
+#!/bin/bash
+#           ====                 ====          /            ,_____________/
+#          ("o o)  Obie Wan?---  o o~~        /            /
+#          _\ -/_             _ _\- /_       /            |
+#         / \  / \           / / \ /  \_____/             |      ___
+#        /   \/   \         / //| |  |\\                  |     /() \
+#       | /|  | |\ |       /  \\| |  |//                 /    _|_____|_
+#       || |  | | ||      /    \\ |  //                 /    | | === | |
+#       (' |  | | `)     |      )===(|                 /     |_|  O  |_|
+#          |  | |       /       | || |                |       ||  O  ||
+#          | /| |      |        (_)(_)                |       ||__*__||
+#          / ||  \    /         |_||_|               /       |~ \___/ ~|
+#         /|_||   \  |          |_||_|              |        /=\ /=\ /=\
+#       _/_[_]|____\_|_________/__][__\____________/_________[_]_[_]_[_]_____
+clear
+if [ "$1" == "" ]
+	then
+		echo
+		echo Nice Try BUT NO EGG Here
+		exit 1
+	else
+		echo The show is a little long
+		echo If you have to go and can\'t wait
+		echo ENTER \<Ctrl\> \+ \] to exit
+		echo Then type quit at the Telnet prompt
+		echo
+		echo I hope you enjoy the show
+		sleep 3
+		clear
+		echo 5
+		sleep 1
+		clear
+		echo 4
+		sleep 1
+		clear
+		echo 3
+		sleep 1
+		clear
+		echo 2
+		sleep 1
+		clear
+		echo 1
+		sleep 1
+		clear
+		telnet towel.blinkenlights.nl
+fi

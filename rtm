@@ -1,0 +1,35 @@
+#!/bin/bash
+clear
+#if [ "$1" == "ep" ]
+#	then
+case $1 in
+ ep)
+		tput setaf 2
+		echo Endpoint RealTime Monitor
+		tput sgr0
+		echo use '<ctrl+c> to exit'
+		echo press Enter to continue
+		read reply
+		tail -f /tmp/endpoint.log 2>/dev/null
+ ;;
+#	else
+ web)
+		tput setaf 2
+                echo Web Alexa WGET RealTime Monitor
+		tput sgr0
+                echo use '<ctrl+c> to exit'
+                echo press Enter to continue
+                read reply
+		tail -f /tmp/runit.log 2>/dev/null
+ ;;
+ *)
+		tput setaf 2
+                echo Web Alexa WGET RealTime Monitor
+		tput sgr0
+                echo use '<ctrl+c> to exit'
+                echo press Enter to continue
+                read reply
+                tail -f /tmp/runit.log 2>/dev/null
+;;
+esac
+#fi

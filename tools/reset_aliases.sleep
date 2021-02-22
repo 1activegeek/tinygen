@@ -1,0 +1,19 @@
+#MODIFIED FRO RUNNING ON WCG DOM WITH ETH0#
+
+# A SCRIPT TO RESET ALIAS ADDRESSES AFTER A REBOOT
+#!/bin/bash
+#sleep to give the network time to start
+date > /tmp/startup.log
+echo resetting aliase >> /tmp/startup.log
+sleep 30
+test -f /usr/local/tinygen/tools/aliases.txt
+if [ "$?" == "0" ]
+	then
+		for addresses in `cat /usr/local/tinygen/tools/aliases.txt`
+			do
+				if [ "$addresses" != "" ]
+					then
+						ip addr add $addresses dev eth0
+				fi
+			done
+fi

@@ -1,0 +1,69 @@
+ clear
+function files_base {
+tput cup 0 0
+cat files.tpl
+tput setaf 6
+tput cup 6 4
+ls /usr/local/tinygen/emailfiles/attachments | wc -l
+tput cup 8 4
+du -sh /usr/local/tinygen/emailfiles/attachments | awk '{print $1}'
+tput cup 6 18
+ls /usr/local/tinygen/emailfiles/bodies | wc -l
+tput cup 8 18
+du -sh /usr/local/tinygen/emailfiles/bodies | awk '{print $1}'
+tput cup 6 27
+ls /usr/local/tinygen/emailfiles/endpoint | wc -l
+tput cup 8 27
+du -sh /usr/local/tinygen/emailfiles/endpoint | awk '{print $1}'
+ tput cup 34 0
+tput sgr0
+}
+clear
+files_base
+while [ "$reply" != "q" ]
+do
+read reply
+case $reply in
+	list)
+		tput cup 34 0
+		tput el
+		echo Which Directory do you want to list? a\/b\/e
+		read dir
+		case $dir in
+			a)
+				clear
+				ls  -l /usr/local/tinygen/emailfiles/attachments | more
+				du -sh /usr/local/tinygen/emailfiles/attachments
+				echo Press Enter to return to TGCC
+			read x
+			;;
+                        b)
+				clear
+                                ls  -l /usr/local/tinygen/emailfiles/bodies | more
+				du -sh /usr/local/tinygen/emailfiles/bodies
+				echo Press Enter to return to TGCC
+			read x
+                        ;;
+                        e)
+				clear
+                                ls  -l /usr/local/tinygen/emailfiles/endpoint | more
+				du -sh /usr/local/tinygen/emailfiles/endpoint
+				echo Press Enter to return to TGCC
+			read x
+                        ;;
+			*)
+				echo o
+			;;
+		esac
+clear
+		files_base
+		;;
+	q)
+		;;
+	*) 
+		tput cup 34 0
+		tput el
+		echo enter list
+		;;
+esac
+done
